@@ -5,6 +5,8 @@ import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
 import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js'
 import { BasisTextureLoader } from 'three/examples/jsm/loaders/BasisTextureLoader.js'
 
+import Experience from '../Experience.js'
+
 export default class Resources extends EventEmitter
 {
     /**
@@ -14,7 +16,7 @@ export default class Resources extends EventEmitter
     {
         super()
 
-        this.experience = window.experience
+        this.experience = new Experience()
         this.renderer = this.experience.renderer.instance
 
         this.setLoaders()
@@ -54,7 +56,7 @@ export default class Resources extends EventEmitter
 
         // Basis images
         const basisLoader = new BasisTextureLoader()
-        basisLoader.setTranscoderPath('basis')
+        basisLoader.setTranscoderPath('basis/')
         basisLoader.detectSupport(this.renderer)
 
         this.loaders.push({
@@ -70,7 +72,7 @@ export default class Resources extends EventEmitter
 
         // Draco
         const dracoLoader = new DRACOLoader()
-        dracoLoader.setDecoderPath('draco')
+        dracoLoader.setDecoderPath('draco/')
         dracoLoader.setDecoderConfig({ type: 'js' })
 
         this.loaders.push({

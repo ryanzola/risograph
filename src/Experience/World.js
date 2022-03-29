@@ -1,10 +1,13 @@
 import * as THREE from 'three'
 
+import Experience from './Experience'
+import Canvas from './Canvas'
+
 export default class World
 {
     constructor(_options)
     {
-        this.experience = window.experience
+        this.experience = new Experience()
         this.config = this.experience.config
         this.scene = this.experience.scene
         this.resources = this.experience.resources
@@ -13,18 +16,13 @@ export default class World
         {
             if(_group.name === 'base')
             {
-                this.setDummy()
+                this.setCanvas()
             }
         })
     }
 
-    setDummy()
-    {
-        const cube = new THREE.Mesh(
-            new THREE.BoxGeometry(1, 1, 1),
-            new THREE.MeshBasicMaterial({ map: this.resources.items.lennaTexture })
-        )
-        this.scene.add(cube)        
+    setCanvas() {
+        this.canvas = new Canvas()
     }
 
     resize()
@@ -33,6 +31,8 @@ export default class World
 
     update()
     {
+        if(this.canvas)
+            this.canvas.update()
     }
 
     destroy()

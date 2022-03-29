@@ -1,12 +1,14 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
+import Experience from './Experience'
+
 export default class Camera
 {
     constructor(_options)
     {
         // Options
-        this.experience = window.experience
+        this.experience = new Experience()
         this.config = this.experience.config
         this.debug = this.experience.debug
         this.time = this.experience.time
@@ -43,7 +45,7 @@ export default class Camera
         this.modes.debug = {}
         this.modes.debug.instance = this.instance.clone()
         this.modes.debug.instance.rotation.reorder('YXZ')
-        this.modes.debug.instance.position.set(5, 5, 5)
+        this.modes.debug.instance.position.set(0, 0, 5)
         
         this.modes.debug.orbitControls = new OrbitControls(this.modes.debug.instance, this.targetElement)
         this.modes.debug.orbitControls.enabled = this.modes.debug.active
